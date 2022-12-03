@@ -1,12 +1,47 @@
-<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Headlines</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Latest News Headlines</h1>
+        <p>Here are the latest news headlines from multiple sources:</p>
+        {% for article in headlines.articles %}
+            <div class="news-item">
+                <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                <p>{{ article.description }}</p>
+            </div>
+        {% endfor %}
+	<br>
+	<h2>Random Headline</h2>
+        <p>Here is a random headline selected from the list of headlines:</p>
+        <div class="news-item">
+            <h2><a href="{{ headline.url }}">{{ headline.title }}</a></h2>
+            <p>{{ headline.description }}</p>
+        </div>
+    </div>
+    <script>
+        // Add a hover effect to the news items
+        var newsItems = document.querySelectorAll(".news-item");
+        newsItems.forEach(function(item) {
+            item.addEventListener("mouseover", function() {
+                item.classList.add("highlight");
+            });
+            item.addEventListener("mouseout", function() {
+                item.classList.remove("highlight");
+            });
+        });
+    
+        // Add a click handler to the random headline
+        var randomHeadline = document.querySelector(".news-item:last-child");
+        randomHeadline.addEventListener("click", function() {
+            // Open the link in a new tab
+            window.open(randomHeadline.querySelector("a").href, "_blank");
+        });
+    </script>
 
-<h1>Latest Headlines</h1>
-
-<ul>
-  {% for article in headlines.articles %}
-    <li>
-      <a href="{{ article.url }}">{{ article.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+</body>
+</html>
 
