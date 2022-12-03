@@ -1,0 +1,12 @@
+<!-- templates/index.html -->
+
+<h1>Latest Headlines</h1>
+
+<ul>
+  {% for article in headlines.articles %}
+    <li>
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+
